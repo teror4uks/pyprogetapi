@@ -42,7 +42,12 @@ class Walker:
         result = json.load(reader(response))
 
         if Walker.DEBUG == 1:
-            print(result)
+            #print(result[1]['Package_Id']) ['Version_Text']['Published_Date']
+            print(result[0]['Package_Id'])
+            for res in result:
+                for pack_id in res.keys():
+                    if pack_id == 'Package_Id':
+                        print(res[pack_id])
         return result
 
     def __str__(self):
