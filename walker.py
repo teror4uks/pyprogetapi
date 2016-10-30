@@ -43,11 +43,17 @@ class Walker:
 
         if Walker.DEBUG == 1:
             #print(result[1]['Package_Id']) ['Version_Text']['Published_Date']
-            print(result[0]['Package_Id'])
+            print(result[0])
+            ar = []
             for res in result:
+                temp = {}
                 for pack_id in res.keys():
                     if pack_id == 'Package_Id':
-                        print(res[pack_id])
+                        temp[pack_id] = res[pack_id]
+                        ar.append(temp)
+                    if pack_id == 'Version_Text':
+                        temp[pack_id] = res[pack_id]
+            print(ar)
         return result
 
     def __str__(self):
