@@ -1,6 +1,7 @@
 import urllib3
 import codecs
 import json
+import journal
 
 class Walker:
     def __init__(self, url, feed, api_key, DEBUG=0):
@@ -46,6 +47,7 @@ class Walker:
             print(result[0])
             res = self.get_format_nuget_pack_list(result)
             print(res)
+        result = self.get_format_nuget_pack_list(result)
         return result
 
     def get_format_nuget_pack_list(self, json_list):
@@ -66,4 +68,7 @@ class Walker:
 if __name__ == '__main__':
     walker = Walker(url='http://172.30.114.63:81', feed='Default', api_key='WRsdqWhltrOLePrsgWxcvZasTGpfgG', DEBUG=1)
     # walker.getfeedid()
-    walker.get_nuget_packages_list()
+    w = walker.get_nuget_packages_list()
+    j = journal.Journal()
+    j.insert_packs(w)
+    j.show_table()
