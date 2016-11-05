@@ -44,13 +44,13 @@ class Walker:
 
         if Walker.DEBUG == 1:
             #print(result[1]['Package_Id']) ['Version_Text']['Published_Date']
-            print(result[0])
-            res = self.get_format_nuget_pack_list(result)
+            #print(result[0])
+            res = self._get_format_nuget_pack_list(result)
             print(res)
-        result = self.get_format_nuget_pack_list(result)
+        result = self._get_format_nuget_pack_list(result)
         return result
 
-    def get_format_nuget_pack_list(self, json_list):
+    def _get_format_nuget_pack_list(self, json_list):
         ar = []
         for res in json_list:
             temp = {}
@@ -66,9 +66,10 @@ class Walker:
         return "API = {0}, FEED = {1}, URL = {2}".format(self.api_key, self.feed, self.url)
 
 if __name__ == '__main__':
-    walker = Walker(url='http://172.30.114.63:81', feed='Default', api_key='WRsdqWhltrOLePrsgWxcvZasTGpfgG', DEBUG=1)
-    # walker.getfeedid()
-    w = walker.get_nuget_packages_list()
-    j = journal.Journal()
-    j.insert_packs(w)
-    j.show_table()
+    main = Walker(url='http://172.30.114.63:81', feed='Default', api_key='WRsdqWhltrOLePrsgWxcvZasTGpfgG', DEBUG=1)
+    mirror = Walker(url='http://172.30.96.16:81', feed='Mirror1', api_key='JsrWEks923s2gQ2K93GKSm45s5a3Ff2', DEBUG=1)
+    mi = mirror.get_nuget_packages_list()
+    #m = main.get_nuget_packages_list()
+    #j_main = journal.Journal()
+    #j_main.insert_packs(m)
+    #j_main.show_table()
