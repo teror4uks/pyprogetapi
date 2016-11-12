@@ -18,3 +18,15 @@ class Journal:
         for row in self.db.execute('select * from packages'):
             print(row)
 
+    def get_table(self):
+        result = [row for row in self.db.execute('select * from packages')]
+        res = set(result)
+        return res
+
+    def diff_table(self, db_mirror):
+        main = self.get_table()
+        mirror = db_mirror.get_table()
+        result = main - mirror
+
+        return result
+
